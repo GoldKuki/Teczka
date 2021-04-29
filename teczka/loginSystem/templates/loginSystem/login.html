@@ -1,0 +1,17 @@
+{% extends "loginSystem/base.html" %}
+
+{% block content %}
+
+<h1>Login page</h1>
+
+<a href="{% url 'logout' %}">Logout</a>
+
+<form method="POST">
+{% csrf_token %}
+
+{{form}}
+
+<button type="submit">Login</button>
+</form>
+
+{% endblock content %}

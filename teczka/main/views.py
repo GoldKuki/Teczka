@@ -1,10 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from .models import Video
 
 # Create your views here.
 
 def index(response):
-    return HttpResponse("<p>siema</p>")
-
-def login(response):
-    return HttpResponse("<p>login page</p>")
+    return render(response, "main/index.html", {})
