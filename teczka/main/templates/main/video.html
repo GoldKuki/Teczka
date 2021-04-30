@@ -1,0 +1,12 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+    {{video.title}}
+{% endblock %}
+
+{% block content %}
+
+    <img src="{{video.thumbnail.url}}"><br>
+    Tittle: {{video.title}}
+
+{% endblock %}
