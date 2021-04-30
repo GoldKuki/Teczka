@@ -21,9 +21,20 @@
         {{ user.profile.picture.url }}
     </li>
 </ul>
-
-
-
 <img src="{{ user.profile.picture.url }}" alt="">
+
+<form method="post" enctype="multipart/form-data">
+
+    {% csrf_token %}
+
+    {{u_form}}
+
+    {{p_form}}
+
+    <button type="submit">Save</button>
+</form>
+
+
+
 
 {% endblock %}

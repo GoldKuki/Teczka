@@ -5,13 +5,13 @@ from loginSystem.models import Profile
 
 class Video(models.Model):
     title = models.CharField(max_length=20)
-    description = models.TextField()
-    thumbnail = models.ImageField()
-    video = models.FileField()
+    description = models.TextField(blank=True)
+    thumbnail = models.ImageField(upload_to='thumbnails')
+    video = models.FileField(blank=True)
     views = models.IntegerField(default=0)
     like = models.IntegerField(default=0)
     dislike = models.IntegerField(default=0)
-    date = models.DateField()
+    date = models.DateTimeField(auto_now_add=True)
 
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
