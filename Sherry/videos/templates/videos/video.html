@@ -1,0 +1,18 @@
+{% extends 'videos/base.html' %}
+
+{% block title %}
+    video title
+{% endblock %}
+
+{% block content %}
+    <video width="320" height="240" controls>
+        <source src="{{data.video.url}}" type="video/mp4">
+    </video><br>
+    title: {{data.title}}<br>
+    desc: {{data.description}}<br>
+    data: {{data.date}}<br>
+    like: {{data.likes}}<br>
+    dislike: {{data.dislikes}}<br>
+    views: {{data.views}}<br>
+    tags: {{data.tags}}<br>
+{% endblock %}

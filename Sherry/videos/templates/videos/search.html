@@ -1,0 +1,14 @@
+{% extends 'videos/base.html' %}
+
+{% block title %}
+    search title
+{% endblock %}
+
+{% block content %}
+
+    {% for video in data %}
+        <a href="{% url 'video' video.id %}">{{video.title}}</a>
+    {% endfor %}
+
+
+{% endblock %}

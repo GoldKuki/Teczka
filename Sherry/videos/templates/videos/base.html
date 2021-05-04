@@ -1,0 +1,31 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+            default title
+        {% endblock %}
+    </title>
+</head>
+<body>
+
+    {% block topbar %}
+
+    <form action="{% url 'search' %}" method="POST">
+
+        {% csrf_token %}
+
+        <input type="search" name="in_search">
+
+        <button type="submit"> Search </button>
+    </form>
+
+    {% endblock %}
+
+    {% block content %}
+        default content
+    {% endblock %}
+</body>
+</html>
