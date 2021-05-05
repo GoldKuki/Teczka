@@ -1,9 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from profiles.models import Profile
+
 # Create your models here.
 
-class Tags(models.Model):
+class Tag(models.Model):
     name = models.CharField(max_length=20)
 
     def __str__(self):
@@ -12,9 +14,9 @@ class Tags(models.Model):
 
 class Video(models.Model):
 
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
 
-    tags = models.ManyToManyField(Tags, blank=True)
+    tags = models.ManyToManyField(Tag, blank=True)
 
     title = models.CharField(max_length=20)
     description = models.TextField(blank=True, null=True)
@@ -32,7 +34,7 @@ class Video(models.Model):
 
 class Comment(models.Model):
     # doto profil
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
     video = models.ForeignKey(Video, on_delete=models.CASCADE)
     content = models.TextField()
 

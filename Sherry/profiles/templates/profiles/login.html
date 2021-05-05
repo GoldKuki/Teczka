@@ -1,0 +1,14 @@
+
+{%for mess in messages %}
+    {{mess}}
+{% endfor %}
+
+<form method="post">
+    {% csrf_token %}
+    <input type="text" name="username">
+    <input type="password" name="password">
+    {{form.errors}}
+    <button type="submit">Here</button>
+</form>
+
+Doesn't have account? <a href="{% url 'register' %}">Sing up</a>

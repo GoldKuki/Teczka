@@ -1,0 +1,14 @@
+
+
+<form method="post">
+    {% csrf_token %}
+    {{form.username}}
+    {{form.email}}
+    {{form.password1}}
+    {{form.password2}}
+
+    {{form.errors}}
+    <button type="submit">Here</button>
+</form>
+
+Does have account? <a href="{% url 'login' %}">Login</a>

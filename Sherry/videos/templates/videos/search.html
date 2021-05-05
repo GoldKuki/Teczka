@@ -7,7 +7,7 @@
 {% block content %}
 
     {% for video in data %}
-        <a href="{% url 'video' video.id %}">{{video.title}}</a>
+        <a href="{% url 'video' video.id %}">{{video.title}}</a><br>
     {% endfor %}
 
 

@@ -21,4 +21,22 @@ def video(request, id):
     video = Video.objects.filter(id=id).first()
     if video is None:
         return redirect('index')
-    return render(request, 'videos/video.html', {'data': video})
+
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            if request.POST.get('like', False):
+                pass
+            if request.POST.get('dislike', False):
+                pass
+        else:
+            return redirect('login')
+
+    video.views += 1
+    video.save()
+
+    comments = Comment.objects.filter(video__id=id)
+    data = {
+        'video': video,
+        'comments': comments,
+    }
+    return render(request, 'videos/video.html', data)

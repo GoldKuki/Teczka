@@ -18,8 +18,13 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.urls import path, include
 
+from profiles import views as profiles_views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('register/', profiles_views.register, name='register'),
+    path('login/', profiles_views.login, name='login'),
+    path('logout/', profiles_views.logout, name='logout'),
     path('', include('videos.urls')),
 ]
 
