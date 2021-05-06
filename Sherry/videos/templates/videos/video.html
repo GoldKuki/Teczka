@@ -14,14 +14,17 @@
     like: {{video.likes}}<br>
     dislike: {{video.dislikes}}<br>
     views: {{video.views}}<br>
-    tags:  {{video.tags.name}}
+    tags:  
+    {% for tag in tags %}
+        {{tag}}
+    {% endfor %}
 
     <br>
 
     <form method="POST">
         {% csrf_token %}
-        <button name="like" type="submit">LIKE</button>
-        <button name="dislike" type="submit">DISLIKE</button>
+        <button type="submit" name="like" value="like">LIKE</button>
+        <button type="submit" name="dislike" value="dislike">DISLIKE</button>
     </form>
 
     <br>
@@ -30,9 +33,16 @@
 
     {% for comment in comments %}
 
-        <h6>{{comment.user.username}}</h6>
-        <h6>{{comment.content}}</h6>
+        <img src="{{comment.author.image.url}}">
+        <h2>{{comment.author.nickname}}</h2>
+        <h2>{{comment.content}}</h2>
 
     {% endfor %}
+
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="content">
+        <button type="submit" name="comment" value="comment">SEND</button>
+    </form>
 
 {% endblock %}

@@ -13,6 +13,23 @@
 
     {% block topbar %}
 
+    <a href="{% url 'index' %}"><h1>Sherry</h1></a>
+
+    {% if user.is_authenticated %}
+
+        {{user.profile.nickname}}
+        <img src="{{user.profile.image.url}}">
+
+        <a href="{% url 'logout' %}"> Profile </a>
+        <a href="{% url 'logout' %}"> Logout </a>
+
+    {% else %}
+
+        <a href="{% url 'login' %}"> Login </a>
+        <a href="{% url 'register' %}"> Sign up </a>
+
+    {% endif %}
+
     <form action="{% url 'search' %}" method="POST">
 
         {% csrf_token %}
@@ -23,6 +40,23 @@
     </form>
 
     {% endblock %}
+
+    {% block leftbar %}
+
+        {% if user.is_authenticated %}
+
+            {% for playlist in playlists %}
+
+            <a href="{% url 'playlist' playlist.id %}">
+
+            {{playlist.titile}}</a>
+
+            {% endfor %}
+
+        {% endif %}
+
+    {% endblock %}
+
 
     {% block content %}
         default content

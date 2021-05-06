@@ -4,6 +4,7 @@ from django.contrib import messages
 
 from .forms import CreateUserForm
 from .models import Profile
+from videos.models import Playlist
 
 # Create your views here.
 
@@ -18,8 +19,14 @@ def register(request):
             user = form.save()
             username = form.cleaned_data.get('username')
 
-            Profile.objects.create(user=user, nickname=username, backgraund='eb3d3d', 
+            profile = Profile.objects.create(user=user, nickname=username, backgraund='eb3d3d', 
                                     gender='N', country='N', description='')
+            
+            Playlist.objects.create(author=profile, titile="Liked",
+                                    description="Your liked videos on Sharry")
+
+            Playlist.objects.create(author=profile, titile="Disliked",
+                                    description="Your disliked videos on Sharry")
 
             return redirect('login')
 

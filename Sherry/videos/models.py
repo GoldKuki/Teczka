@@ -33,10 +33,20 @@ class Video(models.Model):
 
 
 class Comment(models.Model):
-    # doto profil
     author = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
     video = models.ForeignKey(Video, on_delete=models.CASCADE)
     content = models.TextField()
 
     def __str__(self):
         return f'{self.content}'
+
+
+class Playlist(models.Model):
+    author = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    videos = models.ManyToManyField(Video, blank=True)
+
+    titile = models.CharField(max_length=20)
+    description = models.TextField(blank=True)
+
+    def __str__(self):
+        return f'{self.titile} - {self.author}'

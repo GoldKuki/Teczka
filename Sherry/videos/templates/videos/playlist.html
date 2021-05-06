@@ -1,18 +1,28 @@
 {% extends 'videos/base.html' %}
 
 {% block title %}
-    Sherry
+    Playlist
 {% endblock %}
 
+
+
+
 {% block content %}
+
+    <h1> {{playlist.titile}} </h1>
+    <h4> {{playlist.description}} </h4>
+    
     {% for video in videos %}
 
     <a href="{% url 'video' video.id %}">{{video.titile}}
-    <img src="{{video.thumbnail.url}}">
-    <img src="{{video.author.image.url}}">
     {{video.author.nickname}}
+    {{video.author.image.url}}
+    {{video.thumbnail.url}}
     {{video.date}}
-    {{video.views}} </a>
+    {{video.views}}
+    </a>
+
+    <br>
 
     {% endfor %}
 
