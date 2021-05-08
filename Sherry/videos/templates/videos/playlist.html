@@ -1,10 +1,14 @@
 {% extends 'videos/base.html' %}
 
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'videos/css/playlist.css' %}">
+{% endblock head %}
+
+
 {% block title %}
     Playlist
 {% endblock %}
-
-
 
 
 {% block content %}

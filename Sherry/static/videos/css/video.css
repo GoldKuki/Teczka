@@ -1,0 +1,16 @@
+body{
+    background-color: white;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+video{
+    width: calc(85px * 16);
+    height: calc(85px * 9);
+    outline: none;
+    
+}

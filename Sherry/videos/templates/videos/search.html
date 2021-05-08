@@ -1,5 +1,11 @@
 {% extends 'videos/base.html' %}
 
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'videos/css/search.css' %}">
+{% endblock head %}
+
+
 {% block title %}
     search title
 {% endblock %}

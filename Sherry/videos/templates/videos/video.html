@@ -1,5 +1,11 @@
 {% extends 'videos/base.html' %}
 
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'videos/css/video.css' %}">
+{% endblock head %}
+
+
 {% block title %}
     video title
 {% endblock %}
@@ -21,11 +27,12 @@
 
     <br>
 
-    <form method="POST">
+    <form id="rating-form">
         {% csrf_token %}
-        <button type="submit" name="like" value="like">LIKE</button>
-        <button type="submit" name="dislike" value="dislike">DISLIKE</button>
+        <button id="rating-like">LIKE</button>
+        <button id="rating-dislike">DISLIKE</button>
     </form>
+
 
     <br>
 
@@ -39,10 +46,12 @@
 
     {% endfor %}
 
-    <form method="post">
+    <form id="comment-form">
         {% csrf_token %}
-        <input type="text" name="content">
-        <button type="submit" name="comment" value="comment">SEND</button>
+        <input type="text" id="comment-field" required>
+        <button type="submit">SEND</button>
     </form>
 
+    
+    <script src="{% static 'videos/js/video.js' %}"></script>
 {% endblock %}

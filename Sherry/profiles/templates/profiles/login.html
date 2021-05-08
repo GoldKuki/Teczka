@@ -1,14 +1,61 @@
+{% extends 'profiles/base.html' %}
+{% load static %}
 
-{%for mess in messages %}
-    {{mess}}
-{% endfor %}
 
-<form method="post">
-    {% csrf_token %}
-    <input type="text" name="username">
-    <input type="password" name="password">
-    {{form.errors}}
-    <button type="submit">Here</button>
-</form>
+{% block head %}
+    <link rel="stylesheet" href="{% static 'profiles/css/login.css' %}">
+{% endblock head %}
 
-Doesn't have account? <a href="{% url 'register' %}">Sing up</a>
+{% block content %}
+
+
+<div class="login-section">
+    
+    <div class="logo">
+        <a href="{% url 'index' %}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="450" height="130" viewBox="0 0 3741.06 1201.6">
+                <g id="Warstwa_2" data-name="Warstwa 2" transform="translate(0 198.06)">
+                  <g id="Warstwa_2-2" data-name="Warstwa 2">
+                    <path id="Path_1" data-name="Path 1" d="M961.85,522.61c0,265.61-215.32,480.93-480.92,480.93S0,788.22,0,522.61,215.32,41.69,480.93,41.69a481.531,481.531,0,0,1,128,17.22A518.511,518.511,0,0,0,489,327.22L407.74,280.3C364,255,311,277.27,294.79,320.57a78.86,78.86,0,0,0-5,27.82V695.32c0,60.53,65.52,98.36,117.93,68.09,30.31-17.51,282.6-163.17,300.46-173.47A77.56,77.56,0,0,0,742,551l.2-.51c12.74-34,1.31-75.45-34.27-96L577.69,379.35a465.859,465.859,0,0,0-74.91,155.1h0A514,514,0,0,1,522,347.2c23-78.81,64.39-152,120.63-211-5,8.27-44.06,76.06-14.06,155.48,29.49,78.07,101.63,103.45,111.1,106.59a463.924,463.924,0,0,1-43-131.93v-.05c-9.47-55.73-8.25-116.56,3.2-171.95C855.42,174,961.85,335.87,961.85,522.61Z" fill="#e52e4c"/>
+                    <text id="sherry" transform="translate(1176.06 733.94)" font-size="863.46" font-family="SegoeUI-Bold, Segoe UI" font-weight="700"><tspan x="0" y="0">sher</tspan><tspan y="0" letter-spacing="0.01em">r</tspan><tspan y="0">y</tspan></text>
+                  </g>
+                </g>
+              </svg>              
+        </a>
+    </div>
+    
+    
+    <form method="post" class="login-box">
+        {% csrf_token %}
+        
+        <div class="group-label-input">
+            <label>login</label>
+            <input type="text" name="username" class="login-box-username login-input">
+        </div>
+        
+        <div class="group-label-input">
+            <label>hasło</label>
+            <input type="password" name="password" class="login-box-password login-input">
+        </div>
+        
+        {{form.errors}}
+
+        <div class="group-ask-button">
+            <button type="submit" class="login-button">Zaloguj</button>
+    
+            <div class="login-redirect-register">
+                Doesn't have account? <a href="{% url 'register' %}">Sing up</a>
+            </div>
+        </div>
+        
+    </form>
+    
+    
+    
+    {%for mess in messages %}
+        {{mess}}
+    {% endfor %}
+    
+</div>
+
+{% endblock content %}

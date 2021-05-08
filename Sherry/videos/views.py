@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import JsonResponse
 
 from profiles.models import Profile
 from .models import Video, Comment, Playlist
@@ -35,22 +36,29 @@ def video(request, id):
     if video is None:
         return redirect('index')
 
-    if request.method == 'POST':
+    if request.method == 'POST' and request.is_ajax():
         if request.user.is_authenticated:
-
             user = request.user
             profile = Profile.objects.filter(user=user).first()
 
-            if request.POST.get('comment', False):
+            ## create comment
+            if request.POST.get('content', False):
                 content = request.POST.get('content', '')
                 if not content == '':
                     Comment.objects.create(author=profile, video=video, content=content)
+                    return JsonResponse({
+                        'added_comment': {'author': profile.nickname, 'content': content,},
+                        'status': 200,
+                        })
 
+            ## rating video
             like_pl = Playlist.objects.filter(author=profile, titile='Liked').first()
             dislike_pl = Playlist.objects.filter(author=profile, titile='Disliked').first()
             in_like_pl = video in like_pl.videos.all()
             in_dislike_pl = video in dislike_pl.videos.all()
-            if request.POST.get('like', False):
+            rating = request.POST.get('rating', False)
+
+            if rating == 'like':
                 if in_like_pl:
                     like_pl.videos.remove(video)
                     video.likes -= 1
@@ -63,7 +71,7 @@ def video(request, id):
                     dislike_pl.videos.remove(video)
                     video.dislikes -= 1
                 
-            if request.POST.get('dislike', False):
+            if rating == 'dislike':
                 
                 if in_dislike_pl:
                     dislike_pl.videos.remove(video)
@@ -76,6 +84,12 @@ def video(request, id):
                 if in_like_pl:
                     like_pl.videos.remove(video)
                     video.likes -= 1
+
+            data = {
+                'status': 200,
+                'rating': rating,
+            }
+            return JsonResponse(data)
         else:
             return redirect('login')
         # zle ify ułożone, autoryzacja przed kliknieciem like badz dislike

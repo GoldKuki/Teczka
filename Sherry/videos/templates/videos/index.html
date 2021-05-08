@@ -1,5 +1,10 @@
 {% extends 'videos/base.html' %}
 
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'videos/css/index.css' %}">
+{% endblock head %}
+
 {% block title %}
     Sherry
 {% endblock %}

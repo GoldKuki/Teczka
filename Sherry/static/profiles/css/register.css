@@ -1,0 +1,72 @@
+body{
+    font-size: 20px;
+}
+
+.login-section{
+    margin: auto;
+    width: 760px;
+    height: 700px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+}
+
+.logo{
+    margin-bottom: 40px;
+}
+
+.login-box{
+    height: 400px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.group-label-input{
+    margin: 10px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.group-label-input > input{
+    width: 500px;
+    height: 50px;
+    border-radius: 50px;
+    border: 1px gray solid;
+    outline: none;
+}
+
+.group-ask-button{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.login-button{
+    width: 160px;
+    height: 50px;
+    border-radius: 30px;
+    border: 0;
+    background-color: #E52E4C;
+    outline: none;
+
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+
+    order: 2;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.login-redirect-register > a{
+    text-decoration: none;
+    color: #E52E4C;
+    font-weight: bold;
+}

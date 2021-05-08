@@ -1,65 +1,95 @@
+{% load static %}
+
 <html>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="{% static 'videos/css/base.css' %}">
+    <link rel="icon" href="{% static 'favicon.png' %}">
+
+    {% block head %}
+    {% endblock head %}
+
     <title>
         {% block title %}
-            default title
-        {% endblock %}
+        {% endblock title %}
     </title>
 </head>
 <body>
 
     {% block topbar %}
 
-    <a href="{% url 'index' %}"><h1>Sherry</h1></a>
+    <div class="topbar">
 
-    {% if user.is_authenticated %}
+        <div class="logo">
+            <a href="{% url 'index' %}"><h1>Sherry</h1></a>
+        </div>
 
-        {{user.profile.nickname}}
-        <img src="{{user.profile.image.url}}">
+        <form action="{% url 'search' %}" method="POST" class="search-box-form">
 
-        <a href="{% url 'logout' %}"> Profile </a>
-        <a href="{% url 'logout' %}"> Logout </a>
+            {% csrf_token %}
 
-    {% else %}
+            <input type="search" name="in_search" class="search-box-input">
 
-        <a href="{% url 'login' %}"> Login </a>
-        <a href="{% url 'register' %}"> Sign up </a>
+            <button type="submit" class="search-box-button"> Search </button>
+        </form>
 
-    {% endif %}
-
-    <form action="{% url 'search' %}" method="POST">
-
-        {% csrf_token %}
-
-        <input type="search" name="in_search">
-
-        <button type="submit"> Search </button>
-    </form>
-
-    {% endblock %}
-
-    {% block leftbar %}
 
         {% if user.is_authenticated %}
 
-            {% for playlist in playlists %}
+            <div class="user-section">
+                
+                <div class="profile-links">
+                    <a href="{% url 'logout' %}"> Profile </a>
+                    <a href="{% url 'logout' %}"> Logout </a>
+                </div>
+        
+                <div class="group-profile-data">
+                    <div class="nickname">{{user.profile.nickname}}</div>
+                    <img src="{{user.profile.image.url}}" class="round-profile-img">
+                </div>
 
-            <a href="{% url 'playlist' playlist.id %}">
+            </div>
 
-            {{playlist.titile}}</a>
+        {% else %}
 
-            {% endfor %}
+            <div class="profile-links">
+                <a href="{% url 'login' %}"> Login </a>
+                <a href="{% url 'register' %}"> Sign up </a>
+            </div>
 
         {% endif %}
 
-    {% endblock %}
+    </div>
 
+    {% endblock topbar %}
 
-    {% block content %}
-        default content
-    {% endblock %}
+    <div class="container">
+
+        {% block leftbar %}
+            {% if user.is_authenticated %}
+                <div class="leftbar">
+
+                    {% for playlist in playlists %}
+
+                    <a href="{% url 'playlist' playlist.id %}">
+
+                    {{playlist.titile}}</a>
+
+                    {% endfor %}
+                </div> 
+            {% endif %}
+        {% endblock leftbar %}
+    
+        <div class="content">
+            {% block content %}
+
+            {% endblock content %}
+        </div>
+    </div>
 </body>
 </html>
