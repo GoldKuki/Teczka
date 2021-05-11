@@ -10,15 +10,41 @@
 {% endblock %}
 
 {% block content %}
-    {% for video in videos %}
 
-    <a href="{% url 'video' video.id %}">{{video.titile}}
-    <img src="{{video.thumbnail.url}}">
-    <img src="{{video.author.image.url}}">
-    {{video.author.nickname}}
-    {{video.date}}
-    {{video.views}} </a>
+    <div class="video-container" id="video_container">
 
-    {% endfor %}
+        {% for video in videos %}
+
+        <a class="single-video-link" href="{% url 'video' video.id %}">
+        <div class="single-video">
+
+            
+
+                <img class="thumbnail" src="{{video.thumbnail.url}}">
+
+                <div class="right-side">
+    
+                    <div class="title"> {{video.title}} </div>
+                    <div class="group-box">
+                        <img class="profile-picture" src="{{video.author.image.url}}">
+                        <div class="profile-nickname">{{video.author.nickname}}</div>
+                    </div>
+                    <div class="group-box">
+                        <div class="date"> {{video.date}} </div>
+                        <div class="views"> {{video.views}} </div>
+                    </div>
+                    <div class="group-box">
+                        <div class="like"> {{video.likes}} </div>
+                        <div class="dislike"> {{video.dislikes}} </div>
+                    </div>
+                    
+                </div>
+            
+        </div>
+        </a>
+
+        {% endfor %}
+
+    </div>
 
 {% endblock %}

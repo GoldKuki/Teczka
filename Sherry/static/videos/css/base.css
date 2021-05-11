@@ -3,16 +3,19 @@
 }
 
 body{
-    background-color: #afaaaf;
+    background-color: #d4d4d4;
 }
 
 .topbar{
     width: 100%;
-    height: 90px;
-    background-color: #bfbbbf;
+    height: 70px;
+    background-color: #FFFAFA;
     display: flex;
     align-items: center;
     justify-content: space-around;
+    position: fixed;
+    top: 0px;
+    box-shadow: #444 0 1px 10px 0;
 }
 
 .logo{
@@ -26,8 +29,7 @@ body{
 }
 
 .search-box-form{
-    background-color: #aeabbe;
-    width: 400px;
+    width: 790px;
     height: 45px;
     border-radius: 20px;
     display: flex;
@@ -36,15 +38,27 @@ body{
 }
 
 .search-box-input, .search-box-button{
-    height: 30px;
+    height: 45px;
+    outline: none;
+    background-color: #dedede;
 }
 
 .search-box-input{
-    width: 270px;
+    width: 700px;
+    padding-left: 20px;
+    padding-right: 30px;
+    border-radius: 40px;
+    border: 0;
+    font-size: 20px;
+    font-weight: lighter;
 }
 
 .search-box-button{
-    width: 100px;
+    width: 45px;
+    border-radius: 50%;
+    border: 0;
+    margin-left: 20px;
+    cursor: pointer;
 }
 
 .user-section{
@@ -66,9 +80,10 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #aeabbe;
+    background-color: #d4d4d4;
     padding: 5px 10px 5px 12px;
     border-radius: 10px;
+    height: 50px;
 }
 
 .group-profile-data > .nickname{
@@ -85,20 +100,48 @@ body{
     border-radius: 50%;
 }
 
-.container{
-    margin: 10px;
-    position: relative;
-}
-
 .leftbar{
     order: 1;
+    width: 165px;
+    min-width: 165px;
+    height: calc(100vh - 70px);
+    background-color: #fffafa;
+    order: -1;
+    position: fixed;
+    bottom: 0px;
+    box-shadow: #444 1px 10px 10px 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.group-box-options{
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 5px;
+    background-color: #fff;
+    box-shadow: #444 1px 0 1px 1px;
+    cursor: pointer;
+}
+
+.group-box-options > .icon{
+    margin-left: 2px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.group-box-options > .text{
     width: 100px;
-    height: 100vh;
-    background-color: #aeabbe;
-    position: absolute;
-    right: 0px;
+    text-align: center;
+    margin-right: 5px;
 }
 
 .content{
-    order: 0;
+    margin: 80px  10px 10px 175px;
 }

@@ -11,46 +11,78 @@
 {% endblock %}
 
 {% block content %}
-    <video width="320" height="240" controls>
-        <source src="{{video.video.url}}" type="video/mp4">
-    </video><br>
-    title: {{video.title}}<br>
-    desc: {{video.description}}<br>
-    data: {{video.date}}<br>
-    like: {{video.likes}}<br>
-    dislike: {{video.dislikes}}<br>
-    views: {{video.views}}<br>
-    tags:  
-    {% for tag in tags %}
-        {{tag}}
-    {% endfor %}
 
-    <br>
+    <div class='single-video'>
 
-    <form id="rating-form">
-        {% csrf_token %}
-        <button id="rating-like">LIKE</button>
-        <button id="rating-dislike">DISLIKE</button>
-    </form>
+        <div class="left-side">
+            <video controls class='video-player'>
+                <source src="{{video.video.url}}" type="video/mp4">
+            </video>
+
+            <div class="video-title">
+                {{video.title}}
+            </div>
+            <div class="video-tags">
+                {% for tag in tags %}
+                    <div class="video-tag">#{{tag}}</div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="right-side">
+            <div class='author-box'>
+                <img class="author-picture" src="{{video.author.image.url}}"></img>
+                <div class="author-nickname">{{video.author.nickname}}</div>
+            </div>
+            <div class="group-box">
+                <div id="likes">{{video.likes}}</div>
+                <div id="dislikes">{{video.dislikes}}</div>
+            </div>
+            <div class="group-box">
+                <div class="video-data"></div>{{video.date}}
+                <div class="video-views"></div>{{video.views}}
+            </div>
+            <div class="video-description">
+                {{video.description}}
+            </div>
+        </div>
+
+    </div>
+
+    {% csrf_token %}
+    <button id="rating-like">LIKE</button>
+    <button id="rating-dislike">DISLIKE</button>
+    <button id="share">SHARE</button>
+    <button id="watch-later">Save video</button>
 
 
-    <br>
+    <div class="comments-box-system">
 
-    <h2>Comments</h2>
+        <div class="comment-send">
+            <img src="{{user.profile.image.url}}" class="comment-sender-picture">
+            <form id="comment-form">
+                {% csrf_token %}
+                <input class="comment-content" type="text" id="comment-field" required>
+                <button class="comment-button" type="submit">Wyślij</button>
+            </form>
+        </div>
+    
+        <div id="comments" class="comments-box" >
+    
+            {% for comment in comments %}
+                <div class="single-comment">
+                    <img src="{{comment.author.image.url}}" class="comment-sender-picture">
+                    <h2>{{comment.author.nickname}}</h2>
+                    <h2>{{comment.content}}</h2>
+                </div>
+            {% endfor %}
+    
+        </div>
+    </div>
 
-    {% for comment in comments %}
+    
 
-        <img src="{{comment.author.image.url}}">
-        <h2>{{comment.author.nickname}}</h2>
-        <h2>{{comment.content}}</h2>
-
-    {% endfor %}
-
-    <form id="comment-form">
-        {% csrf_token %}
-        <input type="text" id="comment-field" required>
-        <button type="submit">SEND</button>
-    </form>
+    
 
     
     <script src="{% static 'videos/js/video.js' %}"></script>

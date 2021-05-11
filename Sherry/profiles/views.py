@@ -1,8 +1,9 @@
+from os import access
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib import messages
 
-from .forms import CreateUserForm
+from .forms import CreateUserForm, ProfileForm
 from .models import Profile
 from videos.models import Playlist
 
@@ -19,14 +20,15 @@ def register(request):
             user = form.save()
             username = form.cleaned_data.get('username')
 
-            profile = Profile.objects.create(user=user, nickname=username, backgraund='eb3d3d', 
+            profile = Profile.objects.create(user=user, nickname=username, background='eb3d3d', 
                                     gender='N', country='N', description='')
             
-            Playlist.objects.create(author=profile, titile="Liked",
+            Playlist.objects.create(author=profile, access="S", privacy='Pv', title="Liked",
                                     description="Your liked videos on Sharry")
-
-            Playlist.objects.create(author=profile, titile="Disliked",
+            Playlist.objects.create(author=profile, access="S", privacy='Pv', title="Disliked",
                                     description="Your disliked videos on Sharry")
+            Playlist.objects.create(author=profile, access="S", privacy='Pv', title="Watch Later",
+                                    description="Your saved videos")
 
             return redirect('login')
 
@@ -54,3 +56,30 @@ def login(request):
 def logout(request):
     auth_logout(request)
     return redirect('login')
+
+def profile(request, id):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    
+    profile = Profile.objects.filter(id=id).first()
+    if profile.privacy == 'Pv' and not profile.id == request.user.profile.id:
+        return redirect('index')
+
+    data = {'profile': profile}
+
+    return render(request, 'profiles/profile.html', data)
+
+def edit_profile(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    
+    profile = request.user.profile
+
+    data = {}
+
+    form = ProfileForm(request.POST or None, request.FILES or None, instance=profile)
+    if form.is_valid():
+        form.save()
+    data['form'] = form
+
+    return render(request, 'profiles/edit_profile.html', data)

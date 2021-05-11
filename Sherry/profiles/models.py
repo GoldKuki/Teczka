@@ -11,7 +11,7 @@ class Profile(models.Model):
 
     nickname = models.CharField(max_length=20)
     image = models.ImageField(default='user.jpg', upload_to='profil_pics')
-    backgraund = models.CharField(max_length=6, null=True)
+    background = models.CharField(max_length=6, null=True)
     choice_gender = [
         ('M', 'Mężczyzna'),
         ('K', 'Kobieta'),
@@ -25,6 +25,12 @@ class Profile(models.Model):
     ]
     country = models.CharField(max_length=3, choices=choice_gender, default='N')
     description = models.TextField(blank=True, null=True)
+    choice_privacy = [
+        ('Pv', 'Private'),
+        ('Pb', 'Public'),
+        ('Fs', 'For Subscribents'),
+    ]
+    privacy = models.CharField(max_length=2, choices=choice_privacy, default='Pb')
 
     def __str__(self):
         return f'{self.nickname}'
@@ -38,3 +44,9 @@ class Profile(models.Model):
             output_size = (256, 256)
             img.thumbnail(output_size)
             img.save(self.image.path)
+
+
+class Notice(models.Model):
+    reciver = models.ManyToManyField(Profile)
+
+    content = models.TextField()

@@ -35,7 +35,11 @@ body{
 }
 
 .login-input{
+    font-size: 18px;
+    font-weight: lighter;
     width: 500px;
+    padding-left: 20px;
+    padding-right: 20px;
     height: 50px;
     border-radius: 50px;
     border: 1px gray solid;

@@ -25,6 +25,9 @@ urlpatterns = [
     path('register/', profiles_views.register, name='register'),
     path('login/', profiles_views.login, name='login'),
     path('logout/', profiles_views.logout, name='logout'),
+    path('profile/<int:id>', profiles_views.profile, name='profile'),
+    path('edit_profile', profiles_views.edit_profile, name='edit_profile'),
+
     path('', include('videos.urls')),
 ]
 
